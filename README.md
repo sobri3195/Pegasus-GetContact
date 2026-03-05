@@ -1,75 +1,45 @@
 # GetContact API Integration
 
-A Streamlit-based web application for interacting with the GetContact API. This application provides a user-friendly interface to search for contacts and view their profiles using the GetContact service.
+A Streamlit-based web app to authenticate users, store API tokens, and search contact profiles via GetContact.
 
-## Features
+## Fitur Utama
 
-- User authentication system
-- Secure API token management
-- Contact search by phone number
-- Detailed profile information display
-- Modern and responsive UI
-- Error handling and validation
+- Login admin sederhana
+- Manajemen token API (simpan/hapus + masking)
+- Normalisasi dan validasi nomor telepon
+- Pencarian kontak (mock mode dan placeholder live mode)
+- UI terpisah untuk Search dan Settings
 
-## Installation
+## Menjalankan Aplikasi
 
-1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd getcontact-integration
-```
-
-2. Create a virtual environment and activate it:
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-3. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-## Usage
-
-1. Run the Streamlit application:
-```bash
+python -m pip install streamlit
 streamlit run main.py
 ```
 
-2. Open your browser and navigate to the URL shown in the terminal (usually http://localhost:8501)
+Default credential:
+- Username: `admin`
+- Password: `admin123`
 
-3. Login with the following credentials:
-   - Username: admin
-   - Password: admin123
+## Variabel Environment
 
-4. Add your GetContact API token in the Settings page
+- `APP_ADMIN_USERNAME` (default: `admin`)
+- `APP_ADMIN_PASSWORD` (default: `admin123`)
+- `MOCK_MODE` (default: `true`)
+- `GETCONTACT_TIMEOUT` (default: `10`)
+- `DEFAULT_COUNTRY_CODE` (default: `+62`)
 
-5. Start searching for contacts!
+## Pengujian
 
-## Mock Mode
+```bash
+python -m unittest discover -s tests -v
+```
 
-The application is configured to run in mock mode by default. This means it will return dummy data instead of making actual API calls. To use real API:
+## Struktur Modul
 
-1. Obtain an official GetContact API token
-2. Set `MOCK_MODE = False` in `config.py`
-3. Add your API token in the application settings
-
-## Project Structure
-
-- `main.py` - Main application entry point
-- `auth.py` - Authentication module
-- `api_handler.py` - GetContact API interaction
-- `ui.py` - Streamlit UI components
-- `config.py` - Configuration settings
-
-## Security Notes
-
-- The current authentication system uses hardcoded credentials and is for demonstration purposes only
-- In a production environment, implement proper user authentication
-- Never commit API tokens to version control
-- Consider using environment variables for sensitive data
-
-## Created By
-
-Letda Kes Dr. Sobri, S.Kom, CEH, OSCP, OSCE – Pegasus-Sobri Tool 
+- `main.py`: entry point Streamlit
+- `config.py`: konfigurasi aplikasi
+- `auth.py`: autentikasi dan utilitas token
+- `api_handler.py`: logika integrasi API
+- `ui.py`: komponen antarmuka Streamlit
+- `tests/test_core.py`: pengujian unit dasar
